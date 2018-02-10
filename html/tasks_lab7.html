@@ -1,0 +1,253 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Lab 7 Christian Ardito SID: 861140154 Jesse Layman SID: 861135479</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-03-16"><meta name="DC.source" content="tasks_lab7.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Lab 7 Christian Ardito SID: 861140154 Jesse Layman SID: 861135479</h1><!--introduction--><p>Professor: Yingbo Hua, TA: Qiping Zhu, EE110B-023</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">task1</a></li><li><a href="#3">task2</a></li><li><a href="#4">task3</a></li><li><a href="#5">task4</a></li><li><a href="#6">task5</a></li><li><a href="#7">task6</a></li></ul></div><h2 id="1">task1</h2><p><img vspace="5" hspace="5" src="7.4.PNG" alt=""> </p><pre class="codeinput">N = 128;
+n = 0:N-1;
+x = cos(2*pi/50*n);
+x_cs = circshift(x',10)';
+plot(n,x,<span class="string">'r'</span>,n,x_cs,<span class="string">'b'</span>)
+title(<span class="string">'Circular Shift'</span>)
+legend(<span class="string">'original'</span>,<span class="string">'circular shift by 10'</span>)
+</pre><img vspace="5" hspace="5" src="tasks_lab7_01.png" alt=""> <h2 id="3">task2</h2><pre class="codeinput">close <span class="string">all</span>
+X = zeros(1,length(n));
+<span class="keyword">for</span> k = 0:N-1
+    <span class="keyword">for</span> ni = 0:N-1
+        X(k+1) = X(k+1) + x(ni+1)*exp(-1j*2*pi*k*ni/N);
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+figure
+subplot(2,1,1);
+plot(n,abs(X));
+title(<span class="string">'Magnitude'</span>)
+subplot(2,1,2);
+plot(n,angle(X));
+title(<span class="string">'Phase'</span>)
+X1 = X;
+</pre><img vspace="5" hspace="5" src="tasks_lab7_02.png" alt=""> <h2 id="4">task3</h2><pre class="codeinput">close <span class="string">all</span>
+X = zeros(1,length(n));
+<span class="keyword">for</span> k = 0:N-1
+    <span class="keyword">for</span> ni = 0:N-1
+        X(k+1) = X(k+1) + x_cs(ni+1)*exp(-1j*2*pi*k*ni/N);
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+figure
+subplot(2,1,1);
+plot(n,abs(X));
+title(<span class="string">'Magnitude'</span>)
+subplot(2,1,2);
+plot(n,angle(X));
+title(<span class="string">'Phase'</span>)
+X2 = X;
+</pre><img vspace="5" hspace="5" src="tasks_lab7_03.png" alt=""> <h2 id="5">task4</h2><pre class="codeinput">close <span class="string">all</span>
+Y = zeros(1,length(n));
+<span class="keyword">for</span> k = 0:N-1
+    Y(k+1) = Y(k+1) + X1(k+1)*exp(-1j*2*pi*k*10/N);
+<span class="keyword">end</span>
+figure
+subplot(2,1,1);
+plot(n,abs(Y));
+title(<span class="string">'Magnitude'</span>)
+subplot(2,1,2);
+plot(n,angle(Y));
+title(<span class="string">'Phase'</span>)
+</pre><img vspace="5" hspace="5" src="tasks_lab7_04.png" alt=""> <h2 id="6">task5</h2><pre class="codeinput">close <span class="string">all</span>
+y = sin(2*pi*n/100);
+plot(n,y,<span class="string">'r'</span>);
+title(<span class="string">'"random" sequence y[n]'</span>)
+g = cconv(x,y,128);
+figure
+plot(n,g,<span class="string">'b'</span>);
+title(<span class="string">'sequence g[n]'</span>)
+</pre><img vspace="5" hspace="5" src="tasks_lab7_05.png" alt=""> <img vspace="5" hspace="5" src="tasks_lab7_06.png" alt=""> <h2 id="7">task6</h2><pre class="codeinput">X = X1;
+Y = zeros(1,length(n));
+<span class="keyword">for</span> k = 0:N-1
+    <span class="keyword">for</span> ni = 0:N-1
+        Y(k+1) = Y(k+1) + y(ni+1)*exp(-1j*2*pi*k*ni/N);
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+<span class="comment">% figure</span>
+<span class="comment">% subplot(2,1,1);</span>
+<span class="comment">% plot(n,abs(X));</span>
+<span class="comment">% title('Magnitude')</span>
+<span class="comment">% subplot(2,1,2);</span>
+<span class="comment">% plot(n,angle(X));</span>
+<span class="comment">% title('Phase')</span>
+G = X.*Y;
+g = zeros(1,length(n));
+k = 0:N-1;
+<span class="keyword">for</span> ni = 0:N-1
+    g(ni+1) = 1/N*sum(G.*exp(1j*2*pi*k*ni/N));
+<span class="keyword">end</span>
+figure
+plot(n,g)
+title(<span class="string">'g[n]'</span>)
+</pre><pre class="codeoutput">Warning: Imaginary parts of complex X and/or Y arguments ignored 
+</pre><img vspace="5" hspace="5" src="tasks_lab7_07.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Lab 7 Christian Ardito SID: 861140154 Jesse Layman SID: 861135479            
+% Professor: Yingbo Hua,         
+% TA: Qiping Zhu,         
+% EE110B-023 
+
+
+%% task1
+%%
+% 
+% <<7.4.PNG>>
+% 
+
+
+N = 128;
+n = 0:N-1;
+x = cos(2*pi/50*n);
+x_cs = circshift(x',10)';
+plot(n,x,'r',n,x_cs,'b')
+title('Circular Shift')
+legend('original','circular shift by 10')
+%% task2
+close all
+X = zeros(1,length(n));
+for k = 0:N-1
+    for ni = 0:N-1
+        X(k+1) = X(k+1) + x(ni+1)*exp(-1j*2*pi*k*ni/N);
+    end
+end
+figure
+subplot(2,1,1);
+plot(n,abs(X));
+title('Magnitude')
+subplot(2,1,2);
+plot(n,angle(X));
+title('Phase')
+X1 = X;
+%% task3
+close all
+X = zeros(1,length(n));
+for k = 0:N-1
+    for ni = 0:N-1
+        X(k+1) = X(k+1) + x_cs(ni+1)*exp(-1j*2*pi*k*ni/N);
+    end
+end
+figure
+subplot(2,1,1);
+plot(n,abs(X));
+title('Magnitude')
+subplot(2,1,2);
+plot(n,angle(X));
+title('Phase')
+X2 = X;
+%% task4
+close all
+Y = zeros(1,length(n));
+for k = 0:N-1
+    Y(k+1) = Y(k+1) + X1(k+1)*exp(-1j*2*pi*k*10/N);
+end
+figure
+subplot(2,1,1);
+plot(n,abs(Y));
+title('Magnitude')
+subplot(2,1,2);
+plot(n,angle(Y));
+title('Phase')
+%% task5
+close all
+y = sin(2*pi*n/100);
+plot(n,y,'r');
+title('"random" sequence y[n]')
+g = cconv(x,y,128);
+figure
+plot(n,g,'b');
+title('sequence g[n]')
+%% task6
+X = X1;
+Y = zeros(1,length(n));
+for k = 0:N-1
+    for ni = 0:N-1
+        Y(k+1) = Y(k+1) + y(ni+1)*exp(-1j*2*pi*k*ni/N);
+    end
+end
+% figure
+% subplot(2,1,1);
+% plot(n,abs(X));
+% title('Magnitude')
+% subplot(2,1,2);
+% plot(n,angle(X));
+% title('Phase')
+G = X.*Y;
+g = zeros(1,length(n));
+k = 0:N-1;
+for ni = 0:N-1
+    g(ni+1) = 1/N*sum(G.*exp(1j*2*pi*k*ni/N));
+end
+figure
+plot(n,g)
+title('g[n]')
+
+
+##### SOURCE END #####
+--></body></html>

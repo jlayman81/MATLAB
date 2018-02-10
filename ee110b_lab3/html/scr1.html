@@ -1,0 +1,464 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Lab 3</title><meta name="generator" content="MATLAB 9.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-02-08"><meta name="DC.source" content="scr1.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Lab 3</h1><!--introduction--><p>Christian Ardito SID: 861140154,  Jesse Layman     SID: 861135479, Professor: Yingbo Hua, TA: Qiping Zhu, EE110B-023</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#2">1.b</a></li><li><a href="#3">1.c</a></li><li><a href="#4">1.d</a></li><li><a href="#5">1.e</a></li><li><a href="#6">1.f</a></li><li><a href="#7">1.g</a></li><li><a href="#8">1.h</a></li><li><a href="#9">1.i</a></li></ul></div><p><img vspace="5" hspace="5" src="introimg.PNG" alt=""> </p><pre class="codeinput"><span class="comment">%discussion means explain why the magnitude and phase looks the way it does</span>
+<span class="comment">% 1.a</span>
+clear <span class="string">all</span>
+
+
+n = 0:100;
+x1 = 0.9.^n .* cos(pi/5*n); <span class="comment">% step function cuts out negative n\</span>
+XF1 = zeros(151);
+N = 50;
+<span class="keyword">for</span> k = -75:75
+   <span class="keyword">for</span> ll = 0 : 100
+       XF1(k+76) = XF1(k+76) + x1(ll+1) * exp(-1j*2*pi*k/N*ll);
+   <span class="keyword">end</span>
+<span class="keyword">end</span>
+figure
+subplot(2,1,1)
+stem(-75:75,abs(XF1));
+title(<span class="string">'Magnitude XF1'</span>)
+subplot(2,1,2)
+stem(-75:75,angle(XF1));
+title(<span class="string">'Angle XF1'</span>)
+</pre><img vspace="5" hspace="5" src="scr1_01.png" alt=""> <h2 id="2">1.b</h2><pre class="codeinput">clear <span class="string">all</span>
+
+n = 0:100;
+x1 = 0.9.^n .* cos(pi/5*n); <span class="comment">% step function cuts out negative n</span>
+x2 = 1j.*(0.9 .^n) .* sin(pi/5*n);
+XF2 = zeros(151);
+N = 50;
+<span class="keyword">for</span> k = -75:75
+   <span class="keyword">for</span> ll = 0 : 100
+       XF2(k+76) = XF2(k+76) + (x1(ll+1)+ x2(ll+1)) * exp(-1j*2*pi*k/N*ll);
+   <span class="keyword">end</span>
+<span class="keyword">end</span>
+figure
+subplot(2,1,1)
+stem(-75:75,abs(XF2));
+title(<span class="string">'Magnitude XF2'</span>)
+subplot(2,1,2)
+stem(-75:75,angle(XF2));
+title(<span class="string">'Angle XF2'</span>)
+</pre><img vspace="5" hspace="5" src="scr1_02.png" alt=""> <h2 id="3">1.c</h2><pre class="codeinput">clear <span class="string">all</span>
+
+n = 0:100;
+x1 = 0.9.^n .* cos(pi/5*n); <span class="comment">% step function cuts out negative n</span>
+x3 = 1j.*(0.7 .^n) .* sin(pi/5*n);
+XF3 = zeros(151);
+N = 50;
+<span class="keyword">for</span> k = -75:75
+   <span class="keyword">for</span> ll = 0 : 100
+       XF3(k+76) = XF3(k+76) + (x1(ll+1)+ x3(ll+1)) * exp(-1j*2*pi*k/N*ll);
+   <span class="keyword">end</span>
+<span class="keyword">end</span>
+figure
+subplot(2,1,1)
+stem(-75:75,abs(XF3));
+title(<span class="string">'Magnitude XF3'</span>)
+subplot(2,1,2)
+stem(-75:75,angle(XF3));
+title(<span class="string">'Angle XF3'</span>)
+</pre><img vspace="5" hspace="5" src="scr1_03.png" alt=""> <h2 id="4">1.d</h2><pre class="codeinput">clear <span class="string">all</span>
+
+n = 0:100;
+x1 = 0.9.^n .* cos(pi/5*n); <span class="comment">% step function cuts out negative n</span>
+x4 = 1j.*(0.7 .^n) .* sin(pi/7*n);
+x4 = x1 + x4;
+XF4 = zeros(151);
+N = 50;
+<span class="keyword">for</span> k = -75:75
+   <span class="keyword">for</span> ll = 0 : 100
+       XF4(k+76) = XF4(k+76) + x4(ll+1) * exp(-1j*2*pi*k/N*ll);
+   <span class="keyword">end</span>
+<span class="keyword">end</span>
+figure
+subplot(2,1,1)
+stem(-75:75,abs(XF4));
+title(<span class="string">'Magnitude XF4'</span>)
+subplot(2,1,2)
+stem(-75:75,angle(XF4));
+title(<span class="string">'Angle XF4'</span>)
+</pre><img vspace="5" hspace="5" src="scr1_04.png" alt=""> <h2 id="5">1.e</h2><pre class="codeinput">clear <span class="string">all</span>
+
+n = 0:100;
+x1 = 0.9.^n .* cos(pi/5*n); <span class="comment">% step function cuts out negative n</span>
+x4 = 1j.*(0.7 .^n) .* sin(pi/7*n);
+x4 = x1 + x4;
+x4 = [0 0 x4(1:99)];
+XF5 = zeros(151);
+N = 50;
+<span class="keyword">for</span> k = -75:75
+   <span class="keyword">for</span> ll = 0 : 100
+       XF5(k+76) = XF5(k+76) + x4(ll+1) * exp(-1j*2*pi*k/N*ll);
+   <span class="keyword">end</span>
+<span class="keyword">end</span>
+figure
+subplot(2,1,1)
+stem(-75:75,abs(XF5));
+title(<span class="string">'Magnitude XF5'</span>)
+subplot(2,1,2)
+stem(-75:75,angle(XF5));
+title(<span class="string">'Angle XF5'</span>)
+</pre><img vspace="5" hspace="5" src="scr1_05.png" alt=""> <h2 id="6">1.f</h2><pre class="codeinput">clear <span class="string">all</span>
+
+n = -100:0;
+x1 = 0.9.^n .* cos(pi/5*n); <span class="comment">% step function cuts out negative n</span>
+x4 = 1j.*(0.7 .^n) .* sin(pi/7*n);
+x4 = x1 + x4;
+XF6 = zeros(151);
+N = 50;
+<span class="keyword">for</span> k = -75:75
+   <span class="keyword">for</span> ll = 0 : 100
+       XF6(k+76) = XF6(k+76) + x4(ll+1) * exp(-1j*2*pi*k/N*ll);
+   <span class="keyword">end</span>
+<span class="keyword">end</span>
+figure
+subplot(2,1,1)
+stem(-75:75,abs(XF6));
+title(<span class="string">'Magnitude XF6'</span>)
+subplot(2,1,2)
+stem(-75:75,angle(XF6));
+title(<span class="string">'Angle XF6'</span>)
+</pre><img vspace="5" hspace="5" src="scr1_06.png" alt=""> <h2 id="7">1.g</h2><pre class="codeinput">clear <span class="string">all</span>
+
+n = 0:100;
+x1 = 0.9.^n .* cos(pi/5*n); <span class="comment">% step function cuts out negative n</span>
+x4 = 1j.*(0.7 .^n) .* sin(pi/7*n);
+x4 = x1 + x4;
+x4 = x4 .* exp(1j*2*pi*0.1*n);
+XF7 = zeros(151);
+N = 50;
+<span class="keyword">for</span> k = -75:75
+   <span class="keyword">for</span> ll = 0 : 100
+       XF7(k+76) = XF7(k+76) + x4(ll+1) * exp(-1j*2*pi*k/N*ll);
+   <span class="keyword">end</span>
+<span class="keyword">end</span>
+figure
+subplot(2,1,1)
+stem(-75:75,abs(XF7));
+title(<span class="string">'Magnitude XF7'</span>)
+subplot(2,1,2)
+stem(-75:75,angle(XF7));
+title(<span class="string">'Angle XF7'</span>)
+</pre><img vspace="5" hspace="5" src="scr1_07.png" alt=""> <h2 id="8">1.h</h2><pre class="codeinput">clear <span class="string">all</span>
+
+n = 0:100;
+x1 = 0.9.^n .* cos(pi/5*n); <span class="comment">% step function cuts out negative n</span>
+x4 = 1j.*(0.7 .^n) .* sin(pi/7*n);
+x4 = x1 + x4;
+x8 = conv(x1,x4);
+XF8 = zeros(151);
+N = 50;
+<span class="keyword">for</span> k = -75:75
+   <span class="keyword">for</span> ll = 0 : 100
+       XF8(k+76) = XF8(k+76) + x8(ll+1) * exp(-1j*2*pi*k/N*ll);
+   <span class="keyword">end</span>
+<span class="keyword">end</span>
+figure
+subplot(2,1,1)
+stem(-75:75,abs(XF8(1:151)));
+title(<span class="string">'Magnitude XF8'</span>)
+subplot(2,1,2)
+stem(-75:75,angle(XF8(1:151)));
+title(<span class="string">'Angle XF8'</span>)
+</pre><img vspace="5" hspace="5" src="scr1_08.png" alt=""> <h2 id="9">1.i</h2><pre class="codeinput">clear <span class="string">all</span>
+
+n = 0:100;
+x1 = 0.9.^n .* cos(pi/5*n); <span class="comment">% step function cuts out negative n</span>
+x4 = 1j.*(0.7 .^n) .* sin(pi/7*n);
+x4 = x1 + x4;
+x9 = x1 .* x4;
+XF9 = zeros(151);
+N = 50;
+<span class="keyword">for</span> k = -75:75
+   <span class="keyword">for</span> ll = 0 : 100
+       XF9(k+76) = XF9(k+76) + x4(ll+1) * exp(-1j*2*pi*k/N*ll);
+   <span class="keyword">end</span>
+<span class="keyword">end</span>
+figure
+subplot(2,1,1)
+stem(-75:75,abs(XF9));
+title(<span class="string">'Magnitude XF9'</span>)
+subplot(2,1,2)
+stem(-75:75,angle(XF9));
+title(<span class="string">'Angle XF9'</span>)
+</pre><img vspace="5" hspace="5" src="scr1_09.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Lab 3
+% Christian Ardito SID: 861140154,
+%  Jesse Layman     SID: 861135479, 
+% Professor: Yingbo Hua, 
+% TA: Qiping Zhu, 
+% EE110B-023 
+%%
+% 
+% <<introimg.PNG>>
+% 
+
+%discussion means explain why the magnitude and phase looks the way it does
+% 1.a
+clear all
+
+
+n = 0:100;
+x1 = 0.9.^n .* cos(pi/5*n); % step function cuts out negative n\
+XF1 = zeros(151);
+N = 50;
+for k = -75:75
+   for ll = 0 : 100
+       XF1(k+76) = XF1(k+76) + x1(ll+1) * exp(-1j*2*pi*k/N*ll);
+   end
+end
+figure
+subplot(2,1,1)
+stem(-75:75,abs(XF1));
+title('Magnitude XF1')
+subplot(2,1,2)
+stem(-75:75,angle(XF1));
+title('Angle XF1')
+%% 1.b
+clear all
+
+n = 0:100;
+x1 = 0.9.^n .* cos(pi/5*n); % step function cuts out negative n
+x2 = 1j.*(0.9 .^n) .* sin(pi/5*n);
+XF2 = zeros(151);
+N = 50;
+for k = -75:75
+   for ll = 0 : 100
+       XF2(k+76) = XF2(k+76) + (x1(ll+1)+ x2(ll+1)) * exp(-1j*2*pi*k/N*ll);
+   end
+end
+figure
+subplot(2,1,1)
+stem(-75:75,abs(XF2));
+title('Magnitude XF2')
+subplot(2,1,2)
+stem(-75:75,angle(XF2));
+title('Angle XF2')
+%% 1.c
+clear all
+
+n = 0:100;
+x1 = 0.9.^n .* cos(pi/5*n); % step function cuts out negative n
+x3 = 1j.*(0.7 .^n) .* sin(pi/5*n);
+XF3 = zeros(151);
+N = 50;
+for k = -75:75
+   for ll = 0 : 100
+       XF3(k+76) = XF3(k+76) + (x1(ll+1)+ x3(ll+1)) * exp(-1j*2*pi*k/N*ll);
+   end
+end
+figure
+subplot(2,1,1)
+stem(-75:75,abs(XF3));
+title('Magnitude XF3')
+subplot(2,1,2)
+stem(-75:75,angle(XF3));
+title('Angle XF3')
+%% 1.d
+clear all
+
+n = 0:100;
+x1 = 0.9.^n .* cos(pi/5*n); % step function cuts out negative n
+x4 = 1j.*(0.7 .^n) .* sin(pi/7*n);
+x4 = x1 + x4;
+XF4 = zeros(151);
+N = 50;
+for k = -75:75
+   for ll = 0 : 100
+       XF4(k+76) = XF4(k+76) + x4(ll+1) * exp(-1j*2*pi*k/N*ll);
+   end
+end
+figure
+subplot(2,1,1)
+stem(-75:75,abs(XF4));
+title('Magnitude XF4')
+subplot(2,1,2)
+stem(-75:75,angle(XF4));
+title('Angle XF4')
+
+%% 1.e
+clear all
+
+n = 0:100;
+x1 = 0.9.^n .* cos(pi/5*n); % step function cuts out negative n
+x4 = 1j.*(0.7 .^n) .* sin(pi/7*n);
+x4 = x1 + x4;
+x4 = [0 0 x4(1:99)];
+XF5 = zeros(151);
+N = 50;
+for k = -75:75
+   for ll = 0 : 100
+       XF5(k+76) = XF5(k+76) + x4(ll+1) * exp(-1j*2*pi*k/N*ll);
+   end
+end
+figure
+subplot(2,1,1)
+stem(-75:75,abs(XF5));
+title('Magnitude XF5')
+subplot(2,1,2)
+stem(-75:75,angle(XF5));
+title('Angle XF5')
+
+%% 1.f
+clear all
+
+n = -100:0;
+x1 = 0.9.^n .* cos(pi/5*n); % step function cuts out negative n
+x4 = 1j.*(0.7 .^n) .* sin(pi/7*n);
+x4 = x1 + x4;
+XF6 = zeros(151);
+N = 50;
+for k = -75:75
+   for ll = 0 : 100
+       XF6(k+76) = XF6(k+76) + x4(ll+1) * exp(-1j*2*pi*k/N*ll);
+   end
+end
+figure
+subplot(2,1,1)
+stem(-75:75,abs(XF6));
+title('Magnitude XF6')
+subplot(2,1,2)
+stem(-75:75,angle(XF6));
+title('Angle XF6')
+%% 1.g
+clear all
+
+n = 0:100;
+x1 = 0.9.^n .* cos(pi/5*n); % step function cuts out negative n
+x4 = 1j.*(0.7 .^n) .* sin(pi/7*n);
+x4 = x1 + x4;
+x4 = x4 .* exp(1j*2*pi*0.1*n);
+XF7 = zeros(151);
+N = 50;
+for k = -75:75
+   for ll = 0 : 100
+       XF7(k+76) = XF7(k+76) + x4(ll+1) * exp(-1j*2*pi*k/N*ll);
+   end
+end
+figure
+subplot(2,1,1)
+stem(-75:75,abs(XF7));
+title('Magnitude XF7')
+subplot(2,1,2)
+stem(-75:75,angle(XF7));
+title('Angle XF7')
+
+%% 1.h
+clear all
+
+n = 0:100;
+x1 = 0.9.^n .* cos(pi/5*n); % step function cuts out negative n
+x4 = 1j.*(0.7 .^n) .* sin(pi/7*n);
+x4 = x1 + x4;
+x8 = conv(x1,x4);
+XF8 = zeros(151);
+N = 50;
+for k = -75:75
+   for ll = 0 : 100
+       XF8(k+76) = XF8(k+76) + x8(ll+1) * exp(-1j*2*pi*k/N*ll);
+   end
+end
+figure
+subplot(2,1,1)
+stem(-75:75,abs(XF8(1:151)));
+title('Magnitude XF8')
+subplot(2,1,2)
+stem(-75:75,angle(XF8(1:151)));
+title('Angle XF8')
+%% 1.i
+clear all
+
+n = 0:100;
+x1 = 0.9.^n .* cos(pi/5*n); % step function cuts out negative n
+x4 = 1j.*(0.7 .^n) .* sin(pi/7*n);
+x4 = x1 + x4;
+x9 = x1 .* x4;
+XF9 = zeros(151);
+N = 50;
+for k = -75:75
+   for ll = 0 : 100
+       XF9(k+76) = XF9(k+76) + x4(ll+1) * exp(-1j*2*pi*k/N*ll);
+   end
+end
+figure
+subplot(2,1,1)
+stem(-75:75,abs(XF9));
+title('Magnitude XF9')
+subplot(2,1,2)
+stem(-75:75,angle(XF9));
+title('Angle XF9')
+
+
+
+
+##### SOURCE END #####
+--></body></html>
